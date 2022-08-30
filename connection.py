@@ -57,6 +57,9 @@ def populate_db(db_name: str):
 
     assert in_db is True
 
+    ADMIN_NAME = "protac"
+    ADMIN_PASS = "1234"
+    URL = "bolt://localhost:7687"
     conn = Graph(URL, auth=(ADMIN_NAME, ADMIN_PASS), name=db_name)
     conn.delete_all()
     tx = conn.begin()
@@ -69,4 +72,6 @@ def _add_nodes(
 ):
     """Add nodes from dictionary."""
     for node_type in node_dict:
+        # if node_dict[node_type]['Name'] == 'Icotinib':
+        #     print(node_dict[node_type])
         tx.create(node_dict[node_type])
