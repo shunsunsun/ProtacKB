@@ -1146,10 +1146,25 @@ def createGraph():
     db_name = graph.begin()
     graph.delete_all()  # delete existing data
     getPtac = createNodes(db_name)
-    #getPtac = prot2opentar(db_name,getPtac)
+    graph.commit(db_name)
+    db_name = graph.begin()
+
+    getPtac = prot2opentar(db_name,getPtac)
+    graph.commit(db_name)
+    db_name = graph.begin()
+
     getRelns_iglueWhead2mechDis = createReln_iglue_whead2mechdis(db_name,getPtac)
+    graph.commit(db_name)
+    db_name = graph.begin()
+
     getRels_uniprot = createReln_uniprot(db_name, getPtac)
+    graph.commit(db_name)
+    db_name = graph.begin()
+
     getRels_openTar = createReln_openTar(db_name, getPtac)
+    graph.commit(db_name)
+    db_name = graph.begin()
+
     getRels = createReln(db_name,getPtac)
 
     #push to neo4j
